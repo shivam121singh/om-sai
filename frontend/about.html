@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Om Sai Training Center</title>
+  <style>
+    /* Premium Global UI Standard Styles */
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #FAFAFA;
+      color: #0F172A;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Navigation Bar Layout */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 5%;
+      background-color: #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 1.6rem;
+      text-decoration: none;
+      color: #0F172A;
+    }
+    .logo span {
+      color: #F97316;
+      font-weight: 500;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #F97316;
+    }
+    .btn-contact {
+      background-color: #F97316;
+      color: #FFFFFF;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .btn-contact:hover {
+      background-color: #EA580C;
+    }
+
+    /* Mobile Menu Toggle Button UI */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background-color: #0F172A;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* Core Section Containers */
+    .about-section {
+      padding: 3rem 5%;
+      max-width: 75rem;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    @media (min-width: 768px) {
+      .about-section { padding: 5rem 5%; }
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    @media (min-width: 768px) {
+      .section-title { margin-bottom: 4rem; }
+    }
+    .section-title span {
+      background-color: #FFEDD5;
+      color: #C2410C;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin: 1rem 0 0 0;
+      letter-spacing: -0.02em;
+    }
+    @media (min-width: 768px) {
+      .section-title h2 { font-size: 2.5rem; }
+    }
+
+    /* Company Overview Split Grid */
+    .company-grid {
+      display: grid;
+      grid-template-cols: 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      margin-bottom: 4.5rem;
+    }
+    @media (min-width: 768px) {
+      .company-grid { 
+        grid-template-cols: 1fr 1fr; 
+        gap: 4rem;
+        margin-bottom: 6rem;
+      }
+    }
+    .company-text h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+    }
+    @media (min-width: 768px) {
+      .company-text h3 { font-size: 1.75rem; }
+    }
+    .company-text p {
+      color: #64748B;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .company-img-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .company-img-container img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 1.25rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    /* Owner Profile Spotlight (Premium Card) */
+    .owner-card {
+      background-color: #FFFFFF;
+      border-radius: 1.5rem;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-cols: 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+    @media (min-width: 768px) {
+      .owner-card { 
+        grid-template-cols: 0.8fr 1.2fr; 
+        padding: 3rem;
+        gap: 3rem;
+        margin-bottom: 6rem;
+      }
+    }
+    .owner-img-frame {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      aspect-ratio: 1;
+      background-color: #FFEDD5;
+      border-radius: 1rem;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    @media (min-width: 768px) {
+      .owner-img-frame { max-width: 100%; }
+    }
+    .owner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .owner-info h3 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      margin: 0 0 0.25rem 0;
+      color: #0F172A;
+    }
+    @media (min-width: 768px) {
+      .owner-info h3 { font-size: 2rem; }
+    }
+    .owner-role {
+      color: #F97316;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    .owner-bio {
+      color: #475569;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Team Showcase Grid Layout */
+    .team-grid {
+      display: grid;
+      grid-template-cols: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .team-grid { gap: 2rem; }
+    }
+    .team-card {
+      background-color: #FFFFFF;
+      border-radius: 1.25rem;
+      border: 1px solid #E2E8F0;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+    .member-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 1.25rem auto;
+      background-color: #FFEDD5;
+      background-size: cover;
+      background-position: center;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .team-card h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 0.35rem 0;
+      color: #0F172A;
+    }
+    .team-card span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #64748B;
+      background-color: #F1F5F9;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2rem;
+      display: inline-block;
+    }
+
+    /* Mobile Responsive Viewport Clamps */
+    @media (max-width: 991px) {
+      .navbar {
+        padding: 1rem 5%;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #FFFFFF;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-top: 1px solid #F1F5F9;
+        display: none;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links li {
+        width: 100%;
+      }
+      .nav-links a {
+        display: block;
+        padding: 1rem 5%;
+        border-bottom: 1px solid #F1F5F9;
+      }
+      .navbar .btn-contact {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Om<span>sai.</span></a>
+    
+    <!-- Hamburger Trigger icon -->
+    <button class="menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinksList">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="services.html">Service & Jobs</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <a href="apply.html" class="btn-contact">Apply Now ↗</a>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="about-section">
+    
+    <!-- SECTION 1: COMPANY OVERVIEW -->
+    <div class="company-grid">
+      <div class="company-text">
+        <div class="tagline">Who We Are</div>
+        <h3>Streamlining Your Path to International Frontiers</h3>
+        <p>Om Sai Training Center is a premium technical skill development and professional placement institute dedicated to bridging the gap between world-class exceptional talent and leading international networks. We believe that professional growth and advanced trade skills should know no boundaries.</p>
+        <p>By offering tailored multi-channel assistance, dynamic vacancy mapping tools, and strict file verification loops, we ensure each applicant transitions seamlessly into their desired industrial work or visa environment safely and efficiently.</p>
+      </div>
+      <div class="company-img-container">
+        <img src="om.jpg" alt="Our Workplace" />
+      </div>
+    </div>
+
+    <!-- SECTION 2: THE FOUNDER & OWNER SPOTLIGHT -->
+    <div class="section-title">
+      <span>The Visionary</span>
+      <h2>Meet Our Founders</h2>
+    </div>
+
+    <!-- Founder 1 -->
+    <div class="owner-card">
+      <div class="owner-img-frame">
+        <img src="abhay.png" alt="Abhay Singh" class="owner-img" />
+      </div>
+      <div class="owner-info">
+        <h3>Abhay Singh</h3>
+        <span class="owner-role">Founder & Chief Managing Director</span>
+        <p class="owner-bio">Abhay Singh founded Om Sai Training Center with a clear, ambitious mission: to digitize, secure, and simplify international vocational training and career placement for candidates worldwide. Leveraging advanced technical development standards and automated tracing systems, he has engineered our platform to deliver unmatched reliability, transparency, and high-fidelity project management for everyday applicants and administration desks alike.</p>
+      </div>
+    </div>
+
+    <!-- Founder 2 -->
+    <div class="owner-card">
+      <div class="owner-img-frame">
+        <img src="subash.jpeg" alt="Subash Singh" class="owner-img" />
+      </div>
+      <div class="owner-info">
+        <h3>Subash Singh</h3>
+        <span class="owner-role">Co-Founder & Strategic Director</span>
+        <p class="owner-bio">Subash Singh plays a vital role in the growth and success of Om Sai Training Center as a Co-Founder and Strategic Director. With a strong vision for empowering students and job seekers, he has been instrumental in building the organization's foundation and guiding its expansion. His dedication to operational excellence, candidate support, and strategic planning helps ensure that every applicant receives a smooth and reliable experience. Through his leadership, commitment, and passion for creating opportunities, Subash continues to contribute significantly to the company's mission of transforming vocational training and international career placement.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 3: THE TEAM GRID -->
+    <div class="section-title">
+      <span>Our Experts</span>
+      <h2>We Have an Awesome Team</h2>
+    </div>
+
+    <div class="team-grid">
+      <!-- Member 1 -->
+      <div class="team-card">
+        <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150');"></div>
+        <h4>Arjun Sharma</h4>
+        <span>Head of Operations</span>
+      </div>
+
+      <!-- Member 2 -->
+      <div class="team-card">
+        <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150');"></div>
+        <h4>Neha Verma</h4>
+        <span>Global Visa Consultant</span>
+      </div>
+
+      <!-- Member 3 -->
+      <div class="team-card">
+        <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150');"></div>
+        <h4>Rohan Das</h4>
+        <span>Placement Strategist</span>
+      </div>
+
+      <!-- Member 4 -->
+      <div class="team-card">
+        <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150');"></div>
+        <h4>Ananya Mishra</h4>
+        <span>Relations Manager</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Drawer Menu Engine script -->
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinksList = document.getElementById('navLinksList');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinksList.classList.toggle('open');
+    });
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

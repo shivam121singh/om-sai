@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Om Sai Tech - Agency Core Access Gate</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #FAFAFA;
+      color: #0F172A;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    /* Core Responsive Wrapper Fluid Box */
+    .auth-container {
+      background-color: #FFFFFF;
+      width: 100%;
+      max-width: 26rem;
+      margin: 1.5rem 1rem;
+      padding: 2rem 1.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+      border: 1px solid #E2E8F0;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 480px) {
+      .auth-container {
+        padding: 2.5rem 2rem;
+        margin: 2rem auto;
+      }
+    }
+
+    .brand-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .brand-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .brand-logo span {
+      color: #F97316;
+    }
+
+    .brand-header h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+
+    @media (min-width: 480px) {
+      .brand-header h2 {
+        font-size: 1.35rem;
+      }
+    }
+
+    .brand-header p {
+      margin: 0.5rem 0 0 0;
+      font-size: 0.85rem;
+      color: #64748B;
+      line-height: 1.4;
+    }
+
+    /* Form Panels Switching Controls */
+    .form-panel {
+      display: none;
+    }
+
+    .form-panel.active {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .form-group input {
+      padding: 0.65rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #CBD5E1;
+      outline: none;
+      font-size: 1rem;
+      transition: all 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus {
+      border-color: #F97316;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #0F172A;
+      color: #FFFFFF;
+      font-weight: 600;
+      padding: 0.875rem 1rem;
+      border-radius: 0.75rem;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+      box-sizing: border-box;
+    }
+
+    .submit-btn:hover {
+      background-color: #F97316;
+    }
+
+    .panel-footer {
+      text-align: center;
+      font-size: 0.875rem;
+      color: #64748B;
+      margin-top: 1.5rem;
+      line-height: 1.4;
+    }
+
+    .panel-footer span {
+      color: #F97316;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .panel-footer span:hover {
+      text-decoration: underline;
+    }
+
+    .back-home-wrapper {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      text-decoration: none;
+      color: #64748B;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .back-home:hover {
+      color: #0F172A;
+    }
+
+    /* Feedback Alert Banners */
+    #modalAlertMessageLogin, #modalAlertMessageSignup {
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: none;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .success-banner { background-color: #DCFCE7; color: #15803D; border: 1px solid #BBF7D0; display: block !important; }
+    .error-banner { background-color: #FEE2E2; color: #B91C1C; border: 1px solid #FCA5A5; display: block !important; }
+  </style>
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="brand-header">
+      <div class="brand-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="3"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+        Om Sai Tech<span>.</span>
+      </div>
+      <h2 id="panelTitle">Agency Core Login</h2>
+      <p id="panelSubtitle">Secure verification gateway for administrators</p>
+    </div>
+
+    <!-- Login Panel Form Element Segment -->
+    <form id="loginForm" class="form-panel active">
+      <div id="modalAlertMessageLogin"></div>
+      <div class="form-group">
+        <label>Owner Admin ID</label>
+        <input type="text" id="adminId" required placeholder="Enter ID" />
+      </div>
+      <div class="form-group">
+        <label>Security Password</label>
+        <input type="password" id="adminPassword" required placeholder="••••••••" />
+      </div>
+      <button type="submit" class="submit-btn">Verify & Unlock Database</button>
+      
+      <div class="panel-footer">
+        Don't have an administrator profile? <span id="btnToSignup">Register Here</span>
+      </div>
+    </form>
+
+    <!-- Signup Panel Form Element Segment -->
+    <form id="signupForm" class="form-panel">
+      <div id="modalAlertMessageSignup"></div>
+      <div class="form-group">
+        <label>Desired Admin ID</label>
+        <input type="text" id="signupAdminId" required placeholder="Create ID" />
+      </div>
+      <div class="form-group">
+        <label>Global Security Secret Password</label>
+        <input type="password" id="signupAdminPassword" required placeholder="••••••••" />
+      </div>
+      <button type="submit" class="submit-btn">Create Secure Account</button>
+      
+      <div class="panel-footer">
+        Already have secure authorization tokens? <span id="btnToLogin">Log In Instead</span>
+      </div>
+    </form>
+
+    <div class="back-home-wrapper">
+      <a href="apply.html" class="back-home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to Application Form
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const loginFormEl = document.getElementById('loginForm');
+    const signupFormEl = document.getElementById('signupForm');
+    const panelTitle = document.getElementById('panelTitle');
+    const panelSubtitle = document.getElementById('panelSubtitle');
+
+    const showLogin = () => {
+      signupFormEl.classList.remove('active');
+      loginFormEl.classList.add('active');
+      panelTitle.textContent = "Agency Core Login";
+      panelSubtitle.textContent = "Secure verification gateway for administrators";
+    };
+
+    const showSignup = () => {
+      loginFormEl.classList.remove('active');
+      signupFormEl.classList.add('active');
+      panelTitle.textContent = "Register Administrator";
+      panelSubtitle.textContent = "Provision a new core database management credential";
+    };
+
+    document.getElementById('btnToSignup').addEventListener('click', showSignup);
+    document.getElementById('btnToLogin').addEventListener('click', showLogin);
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>

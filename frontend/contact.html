@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Om Sai Training Center</title>
+  <style>
+    /* Premium Global UI Standard Styles */
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #FAFAFA;
+      color: #0F172A;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Navigation Bar Layout */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 5%;
+      background-color: #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 1.6rem;
+      text-decoration: none;
+      color: #0F172A;
+    }
+    .logo span {
+      color: #F97316;
+      font-weight: 500;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #F97316;
+    }
+    .btn-contact {
+      background-color: #F97316;
+      color: #FFFFFF;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .btn-contact:hover {
+      background-color: #EA580C;
+    }
+
+    /* Mobile Menu Toggle Button UI */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background-color: #0F172A;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* Contact Page Layout Grid */
+    .contact-container {
+      max-width: 75rem;
+      margin: 2rem auto;
+      padding: 0 1.25rem;
+      display: grid;
+      grid-template-cols: 1fr;
+      gap: 2.5rem;
+      box-sizing: border-box;
+    }
+    @media (min-width: 768px) {
+      .contact-container { 
+        grid-template-cols: 1.1fr 0.9fr; 
+        margin: 4rem auto;
+        padding: 0 1.5rem;
+        gap: 4rem;
+      }
+    }
+
+    /* Left Side: General Info & Direct Channels */
+    .contact-info-panel h2 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin: 0 0 1rem 0;
+      letter-spacing: -0.02em;
+    }
+    @media (min-width: 768px) {
+      .contact-info-panel h2 { font-size: 2.25rem; }
+    }
+    .contact-info-panel p {
+      color: #64748B;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 0 0 2rem 0;
+    }
+
+    .info-item-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1.25rem;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .info-item-sub-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      width: 100%;
+    }
+    .info-item-box h4 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .info-item-box p, .info-item-box a {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #475569;
+      text-decoration: none;
+      word-break: break-all; /* Prevents overflow layout bugs for long custom emails on narrow viewports */
+    }
+    .info-item-box a:hover {
+      color: #F97316;
+    }
+
+    /* Right Side: Primary Interactive Channels Box */
+    .channel-box {
+      background-color: #FFFFFF;
+      padding: 1.5rem;
+      border-radius: 1.25rem;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      box-sizing: border-box;
+      height: max-content;
+    }
+    @media (min-width: 576px) {
+      .channel-box { padding: 2.5rem; }
+    }
+    .channel-box h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+    .channel-box p {
+      margin: 0 0 1rem 0;
+      color: #64748B;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Premium WhatsApp Direct Messaging Buttons */
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      transition: background-color 0.2s, transform 0.1s;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+      text-align: center;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    @media (min-width: 576px) {
+      .btn-whatsapp { font-size: 1.05rem; }
+    }
+    /* Option A: Primary Desk Accent Color */
+    .btn-whatsapp.primary-desk {
+      background-color: #25D366; /* Official WhatsApp Green */
+    }
+    .btn-whatsapp.primary-desk:hover {
+      background-color: #20BA56;
+      transform: translateY(-1px);
+    }
+    /* Option B: Support Desk Accent Color */
+    .btn-whatsapp.support-desk {
+      background-color: #128C7E; /* Deep WhatsApp Teal */
+    }
+    .btn-whatsapp.support-desk:hover {
+      background-color: #0E7569;
+      transform: translateY(-1px);
+    }
+    .btn-whatsapp svg {
+      fill: #FFFFFF;
+      flex-shrink: 0;
+    }
+    
+    /* Responsive Media Queries for Smartphone Screens */
+    @media (max-width: 991px) {
+      .navbar {
+        padding: 1rem 5%;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #FFFFFF;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-top: 1px solid #F1F5F9;
+        display: none;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links li {
+        width: 100%;
+      }
+      .nav-links a {
+        display: block;
+        padding: 1rem 5%;
+        border-bottom: 1px solid #F1F5F9;
+      }
+      .navbar .btn-contact {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Om<span>sai.</span></a>
+    
+    <!-- Mobile Hamburger Switch Toggle UI Icon -->
+    <button class="menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinksList">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Service & Jobs</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+    </ul>
+    <a href="apply.html" class="btn-contact">Apply Now ↗</a>
+  </nav>
+
+  <!-- Main Content Layout Section -->
+  <main class="contact-container">
+    
+    <!-- LEFT PANEL: REGULAR CONTACT DETAILS -->
+    <div class="contact-info-panel">
+      <h2>Get In Touch With Us</h2>
+      <p>Have questions about our professional training schedules, certifications, or global job placements? Reach out directly using any of our official channels below.</p>
+      
+      <!-- Phone Information Box -->
+      <div class="info-item-box">
+        <div style="color: #F97316; font-size: 1.25rem; font-weight: bold;">📞</div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 1rem;">
+          <h4>Call Desk Helpline</h4>
+          
+          <div class="info-item-sub-row">
+            <p style="font-weight: 600;">Abhay Singh</p>
+            <a href="tel:+918340116178">+91 83401-16178</a>
+          </div>
+          
+          <div class="info-item-sub-row">
+            <p style="font-weight: 600;">Subash Singh</p>
+            <a href="tel:+917992246160">+91 79922-46160</a>
+          </div>
+          
+          <div class="info-item-sub-row">
+            <p style="font-weight: 600;">Abhay Singh</p>
+            <a href="tel:+918797105663">+91 87971-05663</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Information Box -->
+      <div class="info-item-box">
+        <div style="color: #F97316; font-size: 1.25rem; font-weight: bold;">✉️</div>
+        <div>
+          <h4>Official Email</h4>
+          <a href="mailto:abhaybuxar88@gmail.com">abhaybuxar88@gmail.com</a>
+        </div>
+      </div>
+
+      <!-- Physical Address Box -->
+      <div class="info-item-box">
+        <div style="color: #F97316; font-size: 1.25rem; font-weight: bold;">📍</div>
+        <div>
+          <h4>Our Main Center</h4>
+          <p>Om Sai Training Center, Golambar Road, Buxar, Bihar</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: TWO DYNAMIC WHATSAPP LINKS -->
+    <div class="channel-box">
+      <div>
+        <h3>Instant Chat Assistance</h3>
+        <p>Skip the email queues! Click below to open a direct, secure connection on WhatsApp to speak to one of our executives instantly.</p>
+      </div>
+
+      <!-- Enrollment Desk -->
+      <a href="https://api.whatsapp.com/send/?phone=918340116178&text=Hello%20Om%20Sai%20Training%20Center,%20I%20am%20interested%20in%20enrolling%20for%20training.&type=phone_number&app_absent=0" 
+         target="_blank" 
+         class="btn-whatsapp primary-desk">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-2.731c1.61.956 3.197 1.458 4.814 1.459 5.512 0 9.997-4.486 10.001-10.001.002-2.671-1.03-5.182-2.906-7.061C16.623 3.786 14.113 2.75 11.439 2.75 5.923 2.75 1.436 7.234 1.433 12.75c-.001 1.66.444 3.279 1.288 4.7l-.999 3.647 3.742-.981c1.39.757 2.923 1.153 4.183 1.153zm11.304-7.653c-.305-.153-1.805-.891-2.084-.992-.279-.101-.482-.153-.684.153-.203.306-.784.992-.961 1.194-.177.202-.355.228-.66.076-.305-.153-1.287-.475-2.451-1.514-.906-.809-1.517-1.809-1.695-2.114-.178-.306-.019-.471.133-.623.137-.137.305-.356.458-.534.153-.177.203-.305.305-.509.102-.202.051-.381-.025-.534-.076-.153-.684-1.648-.939-2.26-.248-.595-.501-.515-.684-.524-.177-.008-.38-.01-.583-.01-.203 0-.533.076-.812.381-.279.305-1.066 1.042-1.066 2.542 0 1.5 1.091 2.946 1.243 3.149.153.203 2.148 3.281 5.204 4.602.727.314 1.294.502 1.737.643.73.232 1.393.199 1.918.121.584-.087 1.805-.737 2.059-1.449.254-.712.254-1.322.178-1.449-.076-.127-.279-.203-.584-.356z"/></svg>
+        Chat Option 1: Enrollment Desk
+      </a>
+
+      <!-- Placement & Support Desk -->
+      <a href="https://api.whatsapp.com/send/?phone=918797105663&text=Hello%20Om%20Sai%20Training%20Center,%20I%20have%20a%20query%20regarding%20job%20placements.&type=phone_number&app_absent=0" 
+         target="_blank" 
+         class="btn-whatsapp support-desk">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-2.731c1.61.956 3.197 1.458 4.814 1.459 5.512 0 9.997-4.486 10.001-10.001.002-2.671-1.03-5.182-2.906-7.061C16.623 3.786 14.113 2.75 11.439 2.75 5.923 2.75 1.436 7.234 1.433 12.75c-.001 1.66.444 3.279 1.288 4.7l-.999 3.647 3.742-.981c1.39.757 2.923 1.153 4.183 1.153zm11.304-7.653c-.305-.153-1.805-.891-2.084-.992-.279-.101-.482-.153-.684.153-.203.306-.784.992-.961 1.194-.177.202-.355.228-.66.076-.305-.153-1.287-.475-2.451-1.514-.906-.809-1.517-1.809-1.695-2.114-.178-.306-.019-.471.133-.623.137-.137.305-.356.458-.534.153-.177.203-.305.305-.509.102-.202.051-.381-.025-.534-.076-.153-.684-1.648-.939-2.26-.248-.595-.501-.515-.684-.524-.177-.008-.38-.01-.583-.01-.203 0-.533.076-.812.381-.279.305-1.066 1.042-1.066 2.542 0 1.5 1.091 2.946 1.243 3.149.153.203 2.148 3.281 5.204 4.602.727.314 1.294.502 1.737.643.73.232 1.393.199 1.918.121.584-.087 1.805-.737 2.059-1.449.254-.712.254-1.322.178-1.449-.076-.127-.279-.203-.584-.356z"/></svg>
+        Chat Option 2: Placement & Support
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Mobile Dropdown Menu Controller -->
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinksList = document.getElementById('navLinksList');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinksList.classList.toggle('open');
+    });
+  </script>
+  
+  <script src="app.js"></script>
+</body>
+</html>

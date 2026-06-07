@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Om Sai Training Center - Placement Control Board</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background-color: #f8fafc; color: #0f172a; margin: 0; padding: 0; }
+    
+    /* Responsive Navigation Bar Layout */
+    .navbar { 
+      background-color: #0f172a; 
+      color: #ffffff; 
+      padding: 1rem 1.5rem; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      gap: 1rem;
+    }
+    .navbar h1 { margin: 0; font-size: 1.1rem; font-weight: 700; }
+    .logout-btn { background-color: #dc2626; color: white; font-weight: 600; padding: 0.5rem 0.85rem; border-radius: 0.5rem; border: none; cursor: pointer; font-size: 0.85rem; flex-shrink: 0; }
+    
+    @media (min-width: 576px) {
+      .navbar { padding: 1rem 2rem; }
+      .navbar h1 { font-size: 1.25rem; }
+      .logout-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+    }
+
+    /* Core Responsive Dashboard Grid System */
+    .dashboard-layout { display: grid; grid-template-cols: 1fr; gap: 1.5rem; max-width: 85rem; margin: 1.5rem auto; padding: 0 1rem; box-sizing: border-box; }
+    @media (min-width: 1200px) { .dashboard-layout { grid-template-cols: 1.3fr 0.7fr; gap: 2rem; margin: 2rem auto; padding: 0 1.5rem; } }
+    
+    .panel-card { background: white; border-radius: 1rem; border: 1px solid #e2e8f0; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); box-sizing: border-box; }
+    @media (min-width: 576px) { .panel-card { padding: 2rem; } }
+    
+    .panel-card h2 { margin-top: 0; font-size: 1.35rem; margin-bottom: 1.25rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; }
+    @media (min-width: 576px) { .panel-card h2 { font-size: 1.5rem; margin-bottom: 1.5rem; } }
+    
+    /* Adds a clean style for the photo download link */
+    .photo-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .download-photo-btn {
+      font-size: 0.75rem;
+      color: #F97316;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .download-photo-btn:hover {
+      text-decoration: underline;
+      color: #ea580c;
+    }
+    
+    /* Mobile Touch-Swipe Data Table Container Layout Overlay Rules */
+    .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; background: #ffffff; border-radius: 0.5rem; border: 1px solid #e2e8f0; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; min-width: 650px; } /* Ensures the table elements won't smash down on phones */
+    th { background-color: #f1f5f9; padding: 0.75rem 1rem; color: #475569; text-transform: uppercase; font-size: 0.75rem; border-bottom: 2px solid #e2e8f0; }
+    td { padding: 1rem; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
+    
+    /* Premium Expandable Avatar Photo Elements */
+    .table-avatar-container { position: relative; width: 45px; height: 45px; cursor: pointer; }
+    .table-avatar { width: 45px; height: 45px; object-fit: cover; border-radius: 50%; border: 2px solid #F97316; box-shadow: 0 2px 4px rgba(0,0,0,0.05); background-color: #f1f5f9; transition: transform 0.2s; }
+    .table-avatar:hover { transform: scale(1.1); border-color: #ea580c; }
+    
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: #334155; }
+    .form-group input, .form-group textarea { padding: 0.65rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none; font-size: 0.95rem; box-sizing: border-box; width: 100%; }
+    
+    .btn-submit { background-color: #F97316; color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; width: 100%; font-size: 1rem; transition: background 0.2s; }
+    .btn-submit:hover { background-color: #ea580c; }
+    
+    /* Responsive Posted Job Card Blocks */
+    .dashboard-job-card { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; margin-bottom: 1rem; box-sizing: border-box; }
+    .dashboard-job-card img { width: 50px; height: 50px; object-fit: cover; border-radius: 0.25rem; flex-shrink: 0; }
+    .dashboard-job-card div { min-width: 0; } /* Forces text clamping to protect overflow vectors */
+    .dashboard-job-card div strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .job-actions { margin-left: auto; display: flex; gap: 0.35rem; flex-shrink: 0; }
+    .btn-action-edit { background: #2563eb; color: white; border: none; padding: 0.4rem 0.65rem; border-radius: 0.25rem; cursor: pointer; font-size: 0.8rem; }
+    .btn-action-del { background: #dc2626; color: white; border: none; padding: 0.4rem 0.65rem; border-radius: 0.25rem; cursor: pointer; font-size: 0.8rem; }
+    
+    @media (min-width: 576px) {
+      .dashboard-job-card img { width: 60px; height: 60px; }
+      .job-actions { gap: 0.5rem; }
+      .btn-action-edit, .btn-action-del { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+    }
+    
+    #dashboardJobsList { margin-top: 1.5rem; max-height: 400px; overflow-y: auto; padding-right: 0.25rem; }
+    .view-link { color: #2563eb; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem; }
+
+    /* RESPONSIVE PORTRAIT EXPANSION OVERLAY OVERLAY MODAL */
+    .photo-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; padding: 1rem; box-sizing: border-box; }
+    .photo-modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .photo-modal-card { background: white; padding: 1.5rem; border-radius: 1rem; max-width: 28rem; width: 100%; display: flex; flex-direction: column; gap: 1rem; position: relative; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); text-align: center; box-sizing: border-box; }
+    
+    /* Enhanced Mobile Placement for Close Button to prevent edge clipping */
+    .photo-modal-close { position: absolute; top: -14px; right: 10px; width: 32px; height: 32px; background: #dc2626; color: white; font-size: 1.25rem; border: none; border-radius: 50%; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 10; }
+    @media (min-width: 480px) { .photo-modal-close { right: -12px; } }
+    
+    .expanded-preview-img { width: 100%; max-height: 280px; object-fit: contain; border-radius: 0.5rem; background: #f8fafc; border: 1px solid #e2e8f0; }
+    @media (min-width: 576px) { .expanded-preview-img { max-height: 350px; } }
+    
+    .btn-download-photo { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background-color: #10b981; color: white; font-weight: 600; padding: 0.75rem 1rem; border-radius: 0.5rem; text-decoration: none; font-size: 0.95rem; transition: background 0.2s; width: 100%; box-sizing: border-box; }
+    .btn-download-photo:hover { background-color: #059669; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <h1>Placement Control Board (<span id="totalCount">0</span> Candidates Logged)</h1>
+    <button id="logoutBtn" class="logout-btn">Secure Logout</button>
+  </div>
+
+  <!-- Main Grid Area -->
+  <div class="dashboard-layout">
+    
+    <!-- LEFT PANEL: REGULAR CANDIDATE ARCHIVE RECORDS -->
+    <div class="panel-card">
+      <h2>Live Applicant Records</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Photo (Click)</th>
+              <th>Full Name</th>
+              <th>Email Address</th>
+              <th>Destination</th>
+              <th>Purpose</th>
+              <th>Resume</th>
+            </tr>
+          </thead>
+          <tbody id="applicantsTableBody">
+            <!-- Rendered dynamically loops -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: GENERAL CRUD MANAGEMENT FORMS -->
+    <div class="panel-card">
+      <h2 id="formPanelTitle">Publish New Job Poster</h2>
+      <form id="jobPostingForm">
+        <input type="hidden" id="editingJobId" value="" />
+        <div class="form-group">
+          <label>Job Title</label>
+          <input type="text" id="jobTitle" required placeholder="e.g., Lead Technical Foreman" />
+        </div>
+        <div class="form-group">
+          <label>Location Country</label>
+          <input type="text" id="jobLocation" required placeholder="e.g., Dubai, UAE" />
+        </div>
+        <div class="form-group">
+          <label>Salary Package Range</label>
+          <input type="text" id="jobSalary" required placeholder="e.g., ₹8,000,000 / Yr" />
+        </div>
+        <div class="form-group">
+          <label>Job Poster Advertisement Banner Image</label>
+          <input type="file" id="jobPoster" accept="image/*" />
+        </div>
+        <div class="form-group">
+          <label>Description & Core Competencies</label>
+          <textarea id="jobDescription" rows="4" required placeholder="Provide role profiles and requirements..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="jobSubmitBtn">Publish Listing 🚀</button>
+        <button type="button" id="cancelEditBtn" class="btn-action-del" style="width:100%; margin-top:0.5rem; display:none; padding:0.75rem;">Cancel Edit Mode</button>
+      </form>
+
+      <h3 style="margin-top: 2rem; font-size: 1.2rem;">Active Posted Boards</h3>
+      <div id="dashboardJobsList"></div>
+    </div>
+
+  </div>
+
+  <!-- DYNAMIC HIDDEN MODAL OVERLAY INJECTED FOR EXPANDING PORTRAITS -->
+  <div class="photo-modal-overlay" id="photoModalOverlay" onclick="closePhotoModal(event)">
+    <div class="photo-modal-card">
+      <button class="photo-modal-close" onclick="forceCloseModal()">&times;</button>
+      <h3 id="photoModalTitle" style="margin: 0 0 0.25rem 0; font-size: 1.25rem; color: #0f172a;">Candidate Photo</h3>
+      <p id="photoModalSubtitle" style="margin: 0 0 1rem 0; font-size: 0.85rem; color: #64748B;"></p>
+      <img src="" id="expandedPreviewImg" class="expanded-preview-img" alt="Expanded Preview">
+      <a href="" id="downloadPhotoAnchor" class="btn-download-photo" download>Download Full Portrait 📥</a>
+    </div>
+  </div>
+
+  <script>
+    // Embedded functional bindings for the overlay window structures
+    function closePhotoModal(e) {
+      if (e.target === document.getElementById('photoModalOverlay')) {
+        forceCloseModal();
+      }
+    }
+    function forceCloseModal() {
+      document.getElementById('photoModalOverlay').classList.remove('active');
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

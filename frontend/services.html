@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services & Jobs - Om Sai Training Center</title>
+  <style>
+    body { 
+      font-family: system-ui, -apple-system, sans-serif; 
+      background-color: #FAFAFA; 
+      color: #0F172A; 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    /* Navigation Bar Layout */
+    .navbar { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 1.25rem 5%; 
+      background-color: #FFFFFF; 
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02); 
+      position: relative;
+      z-index: 10;
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: #0F172A; text-decoration: none; }
+    .logo span { color: #F97316; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { text-decoration: none; color: #475569; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #F97316; }
+    .btn-contact { background-color: #F97316; color: #FFFFFF; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; font-size: 0.95rem; transition: background 0.2s; display: inline-block; }
+    .btn-contact:hover { background-color: #EA580C; }
+    
+    /* Mobile Menu Toggle Button UI */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background-color: #0F172A;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .container { max-width: 75rem; margin: 2rem auto; padding: 0 1.25rem; box-sizing: border-box; }
+    @media (min-width: 768px) {
+      .container { margin: 4rem auto; padding: 0 1.5rem; }
+    }
+
+    .header-area { text-align: center; margin-bottom: 2.5rem; }
+    .header-area h2 { font-size: 1.85rem; font-weight: 800; margin: 0 0 0.5rem 0; letter-spacing: -0.02em; }
+    .header-area p { color: #64748B; margin: 0; font-size: 1rem; }
+    
+    @media (min-width: 768px) {
+      .header-area h2 { font-size: 2.25rem; }
+      .header-area p { font-size: 1.05rem; }
+    }
+
+    /* Live Responsive Job Cards Grid */
+    .jobs-grid { 
+      display: grid; 
+      grid-template-cols: 1fr; 
+      gap: 1.5rem; 
+    }
+    @media (min-width: 640px) {
+      .jobs-grid { grid-template-cols: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+    }
+    @media (min-width: 768px) {
+      .jobs-grid { gap: 2.5rem; }
+    }
+
+    .job-card { background: #FFFFFF; border-radius: 1rem; border: 1px solid #E2E8F0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
+    
+    /* Transformed Poster Image into a clean, professional landscape rectangle */
+    .poster-img { 
+      width: 100%; 
+      height: auto;
+      aspect-ratio: 16 / 9; /* Enforces a perfect widescreen rectangle aspect ratio */
+      object-fit: cover; /* Prevents stretching by cleanly cropping excess bounds */
+      background-color: #F1F5F9; 
+      border-bottom: 1px solid #E2E8F0;
+    }
+    
+    .card-body { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; gap: 0.5rem; }
+    @media (min-width: 576px) { .card-body { padding: 1.5rem; } }
+
+    .job-title { font-size: 1.2rem; font-weight: 700; margin: 0; color: #0F172A; }
+    @media (min-width: 576px) { .job-title { font-size: 1.25rem; } }
+
+    .job-meta { font-size: 0.85rem; font-weight: 600; color: #F97316; text-transform: uppercase; }
+    .job-desc { font-size: 0.95rem; color: #475569; line-height: 1.5; margin: 0.5rem 0; }
+    .job-salary { font-size: 1.1rem; font-weight: 700; color: #0F172A; margin-top: auto; padding-top: 0.5rem; }
+    .apply-action-btn { background-color: #0F172A; color: white; text-align: center; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; margin-top: 1rem; transition: background 0.2s, background-color 0.2s; width: 100%; box-sizing: border-box; display: block; }
+    .apply-action-btn:hover { background-color: #F97316; }
+
+    /* Responsive Media Queries for Smartphone Viewports */
+    @media (max-width: 991px) {
+      .navbar {
+        padding: 1rem 5%;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #FFFFFF;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-top: 1px solid #F1F5F9;
+        display: none;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links li {
+        width: 100%;
+      }
+      .nav-links a {
+        display: block;
+        padding: 1rem 5%;
+        border-bottom: 1px solid #F1F5F9;
+      }
+      .navbar .btn-contact {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Om Sai Tech<span>.</span></a>
+    
+    <!-- Mobile Hamburger Switch Toggle UI Icon -->
+    <button class="menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinksList">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="./about.html">About Us</a></li>
+      <li><a href="./services.html" class="active">Service & Jobs</a></li>
+      <li><a href="./contact.html">Contact Us</a></li>
+    </ul>
+    <a href="./apply.html" class="btn-contact">Apply Now ↗</a>
+  </nav>
+
+  <!-- Main Grid Core Container -->
+  <div class="container">
+    <div class="header-area">
+      <h2>International Vacancies</h2>
+      <p>Explore hot career tracks published live by our processing desk</p>
+    </div>
+
+    <div class="jobs-grid" id="publicJobsGrid">
+      <!-- Cards render dynamically via app.js javascript tracking engine loop arrays -->
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation Menu Controller -->
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinksList = document.getElementById('navLinksList');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinksList.classList.toggle('open');
+    });
+  </script>
+  
+  <script src="app.js"></script>
+</body>
+</html>
